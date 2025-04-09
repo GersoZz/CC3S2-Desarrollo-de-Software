@@ -55,3 +55,27 @@ Conflicto
 Resolucion del conflicto
 
 ![alt text](./images/9-conflict_solve.png)
+
+Merge y borrar rama
+
+![merge](./images/10-merge.png)
+
+
+## Ejercicio 2: Exploración y manipulación del historial de commits
+
+### Ver el historial detallado de commits:
+
+```bash
+git log -p
+```
+
+![git log -p](./images/11-log_p.png)
+
+
+### Filtrar commits por autor
+
+```bash
+git log --author="GersoZz"
+```
+
+![git log --author](./images/12-log_author.png)
