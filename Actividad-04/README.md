@@ -43,3 +43,15 @@ Todo ok
 En efecto, sí.
 
 ![git log --oneline](./images/7-branches.png)
+
+# Ejercicios
+
+### Resolver conflictos 
+
+Conflicto
+
+![alt text](./images/8-conflict.png)
+
+Resolucion del conflicto
+
+![alt text](./images/9-conflict_solve.png)
