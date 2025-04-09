@@ -1,9 +1,9 @@
-# datos image
+# User info
 
 ![git config](./images/1-datos.png)
 
 
-## git log
+# git log
 
 ![git log](./images/2-log.png)
 
@@ -35,7 +35,11 @@ Es útil para separar el código que se va a usar en los dintintos ambientes: Pr
 ### Realiza una revisión final del historial de commits para asegurarte de que todos los cambios se han registrado correctamente.
 
 Todo ok
+
 ![git log --oneline](./images/6-log.png)
 
 ### Revisa el uso de ramas y merges para ver cómo Git maneja múltiples líneas de desarrollo.
 
+En efecto, sí.
+
+![git log --oneline](./images/7-branches.png)
