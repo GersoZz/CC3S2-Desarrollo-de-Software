@@ -159,6 +159,14 @@ Switched to branch 'feature/new-feature'
 ## Preguntas
 
 
+### ¿Cómo te ha ayudado Git a mantener un historial claro y organizado de tus cambios?
+
+Cada progreso que hago en mi código lo registro mediante un commit. Si más adelante me doy cuenta que cierta feature está fallando, puedo revisar exactamente el commit donde hice ese cambio y corregirlo facilmente.
+
+### ¿Qué beneficios ves en el uso de ramas para desarrollar nuevas características o corregir errores?
+
+Es útil para separar el código que se va a usar en los dintintos ambientes: Producción, Pruebas, Desarrollo. De esta forma nos aseguramos que el código que se usa en producción sea lo mejor posible.
+
 ## Ejercicio 1 Manejo avanzado de ramas y resolución de conflictos
 
 ```bash
