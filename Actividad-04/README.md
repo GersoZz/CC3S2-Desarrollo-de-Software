@@ -552,3 +552,219 @@ $ git checkout -b feature/activity-4-first-part
 Switched to a new branch 'feature/activity-4-first-part'
 ```
 He actualizado este README.md y lo commitearé
+
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/repositorio (feature/activity-4-first-part)
+$ git add Actividad-04/README.md
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/repositorio (feature/activity-4-first-part)
+$ git commit -m "fix: update solution for the first part of activity 4"
+[feature/activity-4-first-part 0e7e69e] fix: update solution for the first part of activity 4
+ 1 file changed, 550 insertions(+)
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/repositorio (feature/activity-4-first-part)
+$ git push origin feature/activity-4-first-part
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 4.55 KiB | 4.55 MiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote:
+remote: Create a pull request for 'feature/activity-4-first-part' on GitHub by visiting:
+remote:      https://github.com/GersoZz/CC3S2-Desarrollo-de-Software/pull/new/feature/activity-4-first-part
+remote:
+To https://github.com/GersoZz/CC3S2-Desarrollo-de-Software.git
+ * [new branch]      feature/activity-4-first-part -> feature/activity-4-first-part
+```
+
+Realizamos el PR y resolvimos las observaciones dejadas en forma de comentarios
+
+![PR](./images/1-PR.png)
+
+La rama fue fusionada y luego eliminada
+
+![Merge and Delete](./images/2-Merge_and_Delete.png)
+
+Ahora borraremos la rama de nuestro repositorio local. Para esto nos moveremos a la rama `main` y luego ejecutaremos el comando `git branch -d feature/activity-4-first-part`. Pues no podemos borrar la rama donde nos encontramos.
+
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/repositorio (feature/activity-4-first-part)
+$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/repositorio (main)
+$ git branch -d feature/activity-4-first-part
+warning: deleting branch 'feature/activity-4-first-part' that has been merged to
+         'refs/remotes/origin/feature/activity-4-first-part', but not yet merged to HEAD
+Deleted branch feature/activity-4-first-part (was 8948536).
+```
+Visualizamos que la rama fue eliminada. Y también recibimos advertencia de que los cambios realizados todavía no están en la rama `main` de nuestro repositorio local. 
+
+Ejecutamos `git pull origin main` para traer desde el repositorio remoto los cambios que ya fueron fusionados ahí.
+
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/repositorio (main)
+$ git pull origin main
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (1/1), 943 bytes | 314.00 KiB/s, done.
+From https://github.com/GersoZz/CC3S2-Desarrollo-de-Software
+ * branch            main       -> FETCH_HEAD
+   abcd30d..7b33d1c  main       -> origin/main
+Updating abcd30d..7b33d1c
+Fast-forward
+ Actividad-04/README.md | 535 ++++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 504 insertions(+), 31 deletions(-)
+```
+Visualizamos que ya contamos con los cambios de la rama `feature/activity-4-first-part` en la rama `main` de nuestro repositorio local.
+
+Finalmente listamos nuestras ramas.
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/repositorio (main)
+$ git branch
+  develop
+  feature/login
+  feature/new-feature
+  feature/questions-first-part
+* main
+```
+
+### Ejercicio 6: Cherry-Picking y Git Stash
+
+### cherry pick
+Editamos main .py y commiteamos
+
+```bash
+$ echo -e "\nprint('Cherry pick this')" >> main.py
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git add main.py
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git commit -m "Add cherry-pick example"
+[main 16dadd8] Add cherry-pick example
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (feature/cherry-pick)
+$ git log --oneline
+16dadd8 (HEAD -> main) Add cherry-pick example
+7f8b57c Merge branch 'bugfix/rollback-feature'
+76d27c5 Fix bug in rollback feature
+4bcb63d add files B, C, and D
+e76cc73 add file_A
+2c7deae Revert "Resolve merge conflict between main and feature/advanced-feature"
+d172c03 Resolve merge conflict between main and feature/advanced-feature
+aedc143 Update main.py message in main branch
+c613936 Add greet function in advanced feature
+f45c517 (feature/new-feature) Add main.py
+95cc685 Set up the repository base documentation
+f65d30a Initial commit with README.md
+```
+
+Creamos la rama feature/cherry-pick a partir del commit anterior `7f8b57c`
+
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git branch feature/cherry-pick 7f8b57c
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git checkout feature/cherry-pick
+Switched to branch 'feature/cherry-pick'
+```
+
+Aplicamos el cherry pick
+
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (feature/cherry-pick)
+$ git cherry-pick 16dadd8
+[feature/cherry-pick a90773e] Add cherry-pick example
+ Date: Mon Apr 14 14:47:50 2025 -0500
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (feature/cherry-pick)
+$ git log --oneline -n 4
+a90773e (HEAD -> feature/cherry-pick) Add cherry-pick example
+7f8b57c Merge branch 'bugfix/rollback-feature'
+76d27c5 Fix bug in rollback feature
+4bcb63d add files B, C, and D
+```
+
+Visualizamos que el commit fue agregado en la rama `feature/cherry-pick`
+
+### stash
+
+Actualizamos el archivo main.py
+
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ echo -e "\nThis change is stashed" >> main.py
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   main.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Guardamos el cambio en un stash
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git stash
+Saved working directory and index state WIP on main: 16dadd8 Add cherry-pick example
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git stash list
+stash@{0}: WIP on main: 16dadd8 Add cherry-pick example
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git status
+On branch main
+nothing to commit, working tree clean
+```
+
+Recuperamos el cambio
+
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git stash pop
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   main.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (b74bf96738345d62220ad8e18b7328d821aa7052)
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git stash list
+
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   main.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Finalmente observamos que el historial de commits es el mismo
+
+```bash
+W10@W10PC MINGW64 /f/UNI/25-1/CC3S2A - Desarrollo de Software/Actividad-04 (main)
+$ git log --oneline -n 4
+16dadd8 (HEAD -> main) Add cherry-pick example
+7f8b57c Merge branch 'bugfix/rollback-feature'
+76d27c5 Fix bug in rollback feature
+4bcb63d add files B, C, and D
+```
